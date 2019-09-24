@@ -19,44 +19,17 @@ import extension.nativetext.Utils.Table;
 
 @SuppressWarnings("unused")
 public class Extension {
-	private Activity activity;
-	private boolean is_initialized = false;
 	private int width = 0;
 	private int height = 0;
 	private byte[] pixels = null;
 
 	@SuppressWarnings("unused")
 	public Extension(android.app.Activity main_activity) {
-		activity = main_activity;
 		Utils.set_tag("nativetext");
-	}
-
-	// Called from extension_android.cpp each frame.
-	@SuppressWarnings("unused")
-	public void update(long L) {
-		Utils.execute_tasks(L);
-	}
-
-	@SuppressWarnings("unused")
-	public void app_activate(long L) {
-	}
-
-	@SuppressWarnings("unused")
-	public void app_deactivate(long L) {
 	}
 
 	@SuppressWarnings("unused")
 	public void extension_finalize(long L) {
-	}
-
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	private boolean check_is_initialized() {
-		if (is_initialized) {
-			return true;
-		} else {
-			Utils.log("The extension is not initialized.");
-			return false;
-		}
 	}
 
 	private int init(long L) {

@@ -4,6 +4,7 @@
 // This is the entry point of the extension. It defines Lua API of the extension.
 
 static const luaL_reg lua_functions[] = {
+	{"init", EXTENSION_INIT},
 	{"new", EXTENSION_NEW},
 	{0, 0}
 };
@@ -253,19 +254,10 @@ dmExtension::Result INITIALIZE(dmExtension::Params *params) {
 }
 
 dmExtension::Result UPDATE(dmExtension::Params *params) {
-	EXTENSION_UPDATE(params->m_L);
 	return dmExtension::RESULT_OK;
 }
 
 void EXTENSION_ON_EVENT(dmExtension::Params *params, const dmExtension::Event *event) {
-	switch (event->m_Event) {
-		case dmExtension::EVENT_ID_ACTIVATEAPP:
-			EXTENSION_APP_ACTIVATE(params->m_L);
-			break;
-		case dmExtension::EVENT_ID_DEACTIVATEAPP:
-			EXTENSION_APP_DEACTIVATE(params->m_L);
-			break;
-	}
 }
 
 dmExtension::Result FINALIZE(dmExtension::Params *params) {

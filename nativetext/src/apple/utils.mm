@@ -1,4 +1,4 @@
-#if defined(DM_PLATFORM_IOS)
+#if defined(DM_PLATFORM_IOS) || defined(DM_PLATFORM_OSX)
 
 #import "utils.h"
 

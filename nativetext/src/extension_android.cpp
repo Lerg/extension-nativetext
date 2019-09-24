@@ -7,9 +7,6 @@
 #include "android/java_lua.h"
 
 static jobject java_extension_object = NULL;
-static jmethodID java_extension_update = NULL;
-static jmethodID java_extension_app_activate = NULL;
-static jmethodID java_extension_app_deactivate = NULL;
 static jmethodID java_extension_finalize = NULL;
 static jmethodID java_extension_init = NULL;
 static jmethodID java_extension_generate_text_bitmap = NULL;
@@ -90,9 +87,6 @@ void EXTENSION_INITIALIZE(lua_State *L) {
 	java_extension_init = env->GetMethodID(java_extension_class, "init", "(J)I");
 	java_extension_generate_text_bitmap = env->GetMethodID(java_extension_class, "generate_text_bitmap", "(Ljava/lang/String;ILjava/lang/String;IFFFFFFFFFFFFFFFFFFFF)I");
 	java_extension_finalize = env->GetMethodID(java_extension_class, "extension_finalize", "(J)V");
-	java_extension_update = env->GetMethodID(java_extension_class, "update", "(J)V");
-	java_extension_app_activate = env->GetMethodID(java_extension_class, "app_activate", "(J)V");
-	java_extension_app_deactivate = env->GetMethodID(java_extension_class, "app_deactivate", "(J)V");
 	java_extension_object = (jobject)env->NewGlobalRef(env->NewObject(java_extension_class, java_extension_constructor, dmGraphics::GetNativeAndroidActivity()));
 	if (java_extension_object == NULL) {
 		dmLogError("java_extension_object is NULL");
@@ -100,28 +94,6 @@ void EXTENSION_INITIALIZE(lua_State *L) {
 	java_extension_width = env->GetFieldID(java_extension_class, "width" , "I");
 	java_extension_height = env->GetFieldID(java_extension_class, "height" , "I");
 	java_extension_pixels = env->GetFieldID(java_extension_class, "pixels" , "[B");
-}
-
-void EXTENSION_UPDATE(lua_State *L) {
-	if (java_extension_object != NULL) {
-		ThreadAttacher attacher;
-		// Update the Java side so it can invoke any pending listeners.
-		attacher.env->CallVoidMethod(java_extension_object, java_extension_update, (jlong)L);
-	}
-}
-
-void EXTENSION_APP_ACTIVATE(lua_State *L) {
-	if (java_extension_object != NULL) {
-		ThreadAttacher attacher;
-		attacher.env->CallVoidMethod(java_extension_object, java_extension_app_activate, (jlong)L);
-	}
-}
-
-void EXTENSION_APP_DEACTIVATE(lua_State *L) {
-	if (java_extension_object != NULL) {
-		ThreadAttacher attacher;
-		attacher.env->CallVoidMethod(java_extension_object, java_extension_app_deactivate, (jlong)L);
-	}
 }
 
 void EXTENSION_FINALIZE(lua_State *L) {

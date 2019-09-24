@@ -36,10 +36,10 @@
       <mesh>
         <source id="pPlane1-POSITION">
           <float_array id="pPlane1-POSITION-array" count="12">
--1.000000 -1.000000 0.000000
-1.000000 -1.000000 0.000000
--1.000000 1.000000 0.000000
-1.000000 1.000000 0.000000
+-0.500000 -0.500000 0.000000
+0.500000 -0.500000 0.000000
+-0.500000 0.500000 0.000000
+0.500000 0.500000 0.000000
 </float_array>
           <technique_common>
             <accessor source="#pPlane1-POSITION-array" count="4" stride="3">

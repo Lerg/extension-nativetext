@@ -1,4 +1,4 @@
-#if !defined(DM_PLATFORM_IOS) && !defined(DM_PLATFORM_ANDROID)
+#if !defined(DM_PLATFORM_IOS) && !defined(DM_PLATFORM_OSX) && !defined(DM_PLATFORM_ANDROID)
 
 #include <dmsdk/sdk.h>
 #include "extension.h"
@@ -24,15 +24,6 @@ void EXTENSION_TEXT_BITMAP_RELEASE() {
 }
 
 void EXTENSION_INITIALIZE(lua_State *L) {
-}
-
-void EXTENSION_UPDATE(lua_State *L) {
-}
-
-void EXTENSION_APP_ACTIVATE(lua_State *L) {
-}
-
-void EXTENSION_APP_DEACTIVATE(lua_State *L) {
 }
 
 void EXTENSION_FINALIZE(lua_State *L) {
