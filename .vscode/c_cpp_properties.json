@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/nativetext/external/stub/**",
+                "${workspaceFolder}/nativetext/include/**",
+				"${workspaceFolder}/nativetext/src/**",
+                "~/Library/Android/sdk/ndk-bundle/sysroot/usr/include",
+                "~/Library/Android/sdk/ndk-bundle/sysroot/usr/include/aarch64-linux-android"
+            ],
+            "defines": ["DM_PLATFORM_ANDROID"],
+            "macFrameworkPath": [
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

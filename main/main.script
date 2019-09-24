@@ -1,0 +1,24 @@
+local function apply_image(self, image_resource)
+	pprint(image_resource)
+	if image_resource and image_resource.buffer then
+		resource.set_texture(go.get('#model', 'texture0'), image_resource.header, image_resource.buffer)
+		local scale = 1
+		go.set_scale(vmath.vector3(scale * image_resource.header.width, scale * image_resource.header.height, 1))
+	else
+		print('The image was not loaded.')
+	end
+end
+
+function init(self)
+	local image_resource = nativetext.new{
+		text = 'This is a test ど러연关 тест',
+		size = 30,
+		color = vmath.vector4(0.2, 0.9, 0.9, 1),
+		outline_size = 4,
+		outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
+		backgroud_color = vmath.vector4(0.1, 0.2, 0.1, 1),
+		shadow_size = 4,
+		shadow_color = vmath.vector4(0, 0, 0, 1)
+	}
+	apply_image(self, image_resource)
+end
