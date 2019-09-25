@@ -84,6 +84,13 @@ int EXTENSION_NEW(lua_State *L) {
 	}
 	lua_pop(L, 1);
 
+	int text_align = 0;
+	lua_getfield(L, params_index, "align");
+	if (lua_isnumber(L, -1)) {
+		text_align = lua_tonumber(L, -1);
+	}
+	lua_pop(L, 1);
+
 	float spacing_mult = 1;
 	lua_getfield(L, params_index, "spacing_mult");
 	if (lua_isnumber(L, -1)) {
@@ -109,6 +116,20 @@ int EXTENSION_NEW(lua_State *L) {
 	lua_getfield(L, params_index, "shadow_size");
 	if (lua_isnumber(L, -1)) {
 		shadow_size = lua_tonumber(L, -1);
+	}
+	lua_pop(L, 1);
+
+	float shadow_x = 0;
+	lua_getfield(L, params_index, "shadow_x");
+	if (lua_isnumber(L, -1)) {
+		shadow_x = lua_tonumber(L, -1);
+	}
+	lua_pop(L, 1);
+
+	float shadow_y = 0;
+	lua_getfield(L, params_index, "shadow_y");
+	if (lua_isnumber(L, -1)) {
+		shadow_y = lua_tonumber(L, -1);
 	}
 	lua_pop(L, 1);
 
@@ -202,7 +223,7 @@ int EXTENSION_NEW(lua_State *L) {
 	int height = 0;
 	void *pixels = NULL;
 	int status = EXTENSION_GENERATE_TEXT_BITMAP(text, font_size, font_name,
-		text_width, spacing_mult, spacing_add, outline_size, shadow_size,
+		text_width, text_align, spacing_mult, spacing_add, outline_size, shadow_size, shadow_x, shadow_y,
 		color_r, color_g, color_b, color_a,
 		outline_color_r, outline_color_g, outline_color_b, outline_color_a,
 		shadow_color_r, shadow_color_g, shadow_color_b, shadow_color_a,
@@ -247,9 +268,26 @@ dmExtension::Result APP_FINALIZE(dmExtension::AppParams *params) {
 }
 
 dmExtension::Result INITIALIZE(dmExtension::Params *params) {
-	luaL_register(params->m_L, EXTENSION_NAME_STRING, lua_functions);
-	lua_pop(params->m_L, 1);
-	EXTENSION_INITIALIZE(params->m_L);
+	lua_State *L = params->m_L;
+	luaL_register(L, EXTENSION_NAME_STRING, lua_functions);
+
+	lua_pushnumber(L, 0);
+	lua_setfield(L, -2, "align_normal");
+
+	lua_pushnumber(L, 1);
+	lua_setfield(L, -2, "align_left");
+
+	lua_pushnumber(L, 2);
+	lua_setfield(L, -2, "align_right");
+
+	lua_pushnumber(L, 3);
+	lua_setfield(L, -2, "align_center");
+
+	lua_pushnumber(L, 4);
+	lua_setfield(L, -2, "align_justified");
+
+	lua_pop(L, 1);
+	EXTENSION_INITIALIZE(L);
 	return dmExtension::RESULT_OK;
 }
 

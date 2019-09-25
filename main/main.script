@@ -10,13 +10,21 @@ local function apply_image(self, image_resource)
 end
 
 function init(self)
+	nativetext.init{
+		max_texture_width = 2048,
+		max_texture_height = 2048
+	}
 	local image_resource = nativetext.new{
-		text = 'This is a test ど러연关 ыыыьщюш',
+		text = 'This is a test ど러연关 ыыыьщюш ตตต ตัตัตั ตั้ตั้ตั้ ',
+		width = 250,
 		size = 30,
+		align = nativetext.align_center,
+		shadow_x = 8, shadow_y = -8,
 		color = vmath.vector4(0, 1, 1, 1),
+		spacing_mult = 20,
 		outline_size = 8,
 		outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
-		backgroud_color = vmath.vector4(0.1, 0.2, 0.8, 1),
+		background_color = vmath.vector4(0.1, 0.2, 0.8, 1),
 		shadow_size = 8,
 		shadow_color = vmath.vector4(0, 0, 0, 1)
 	}

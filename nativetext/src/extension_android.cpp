@@ -28,7 +28,7 @@ int EXTENSION_INIT(lua_State *L) {
 }
 
 int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *font_name,
-	int text_width, float spacing_mult, float spacing_add, float outline_size, float shadow_size,
+	int text_width, int text_align, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
 	float color_r, float color_g, float color_b, float color_a,
 	float outline_color_r, float outline_color_g, float outline_color_b, float outline_color_a,
 	float shadow_color_r, float shadow_color_g, float shadow_color_b, float shadow_color_a,
@@ -42,7 +42,7 @@ int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *
 		jstring font_name_string = env->NewStringUTF(font_name);
 		result = env->CallIntMethod(java_extension_object, java_extension_generate_text_bitmap,
 			text_string, (jint)font_size, font_name_string,
-			(jint)text_width, (jfloat)spacing_mult, (jfloat)spacing_add, (jfloat)outline_size, (jfloat)shadow_size,
+			(jint)text_width, (jint)text_align, (jfloat)spacing_mult, (jfloat)spacing_add, (jfloat)outline_size, (jfloat)shadow_size, (jfloat)shadow_x, (jfloat)shadow_y,
 			(jfloat)color_r, (jfloat)color_g, (jfloat)color_b, (jfloat)color_a,
 			(jfloat)outline_color_r, (jfloat)outline_color_g, (jfloat)outline_color_b, (jfloat)outline_color_a,
 			(jfloat)shadow_color_r, (jfloat)shadow_color_g, (jfloat)shadow_color_b, (jfloat)shadow_color_a,
@@ -85,7 +85,7 @@ void EXTENSION_INITIALIZE(lua_State *L) {
 	}
 	jmethodID java_extension_constructor = env->GetMethodID(java_extension_class, "<init>", "(Landroid/app/Activity;)V");
 	java_extension_init = env->GetMethodID(java_extension_class, "init", "(J)I");
-	java_extension_generate_text_bitmap = env->GetMethodID(java_extension_class, "generate_text_bitmap", "(Ljava/lang/String;ILjava/lang/String;IFFFFFFFFFFFFFFFFFFFF)I");
+	java_extension_generate_text_bitmap = env->GetMethodID(java_extension_class, "generate_text_bitmap", "(Ljava/lang/String;ILjava/lang/String;IIFFFFFFFFFFFFFFFFFFFFFF)I");
 	java_extension_finalize = env->GetMethodID(java_extension_class, "extension_finalize", "(J)V");
 	java_extension_object = (jobject)env->NewGlobalRef(env->NewObject(java_extension_class, java_extension_constructor, dmGraphics::GetNativeAndroidActivity()));
 	if (java_extension_object == NULL) {

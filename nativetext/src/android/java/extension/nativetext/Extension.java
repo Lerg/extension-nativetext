@@ -22,6 +22,8 @@ public class Extension {
 	private int width = 0;
 	private int height = 0;
 	private byte[] pixels = null;
+	private int max_texture_width = 1024;
+	private int max_texture_height = 1024;
 
 	@SuppressWarnings("unused")
 	public Extension(android.app.Activity main_activity) {
@@ -33,6 +35,13 @@ public class Extension {
 	}
 
 	private int init(long L) {
+		Utils.check_arg_count(L, 1);
+		Scheme scheme = new Scheme()
+			.number("max_texture_width")
+			.number("max_texture_height");
+		Table params = new Table(L, 1).parse(scheme);
+		max_texture_width = params.get_integer("max_texture_width", max_texture_width);
+		max_texture_height = params.get_integer("max_texture_height", max_texture_height);
 		return 0;
 	}
 
@@ -41,7 +50,7 @@ public class Extension {
 	}
 
 	private int generate_text_bitmap(String text, int font_size, String font_name,
-		int text_width, float spacing_mult, float spacing_add, float outline_size, float shadow_size,
+		int text_width, int text_align, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
 		float color_r, float color_g, float color_b, float color_a,
 		float outline_color_r, float outline_color_g, float outline_color_b, float outline_color_a,
 		float shadow_color_r, float shadow_color_g, float shadow_color_b, float shadow_color_a,
@@ -61,13 +70,22 @@ public class Extension {
 		}
 
 		if (shadow_color_a > 0 && shadow_size > 0) {
-			text_paint.setShadowLayer(shadow_size, 0, 0, argb(shadow_color_a, shadow_color_r, shadow_color_g, shadow_color_b));
+			text_paint.setShadowLayer(shadow_size, shadow_x, shadow_y, argb(shadow_color_a, shadow_color_r, shadow_color_g, shadow_color_b));
 		}
 
 		if (text_width == 0) {
 			text_width = (int)Math.ceil(text_paint.measureText(text));
 		}
-		StaticLayout text_layout = new StaticLayout(text, text_paint, text_width, Layout.Alignment.ALIGN_CENTER, spacing_mult, spacing_add, false);
+		Layout.Alignment alignment = Layout.Alignment.ALIGN_NORMAL;
+		switch (text_align) {
+			case 2:
+				alignment = Layout.Alignment.ALIGN_OPPOSITE;
+				break;
+			case 3:
+				alignment = Layout.Alignment.ALIGN_CENTER;
+				break;
+		}
+		StaticLayout text_layout = new StaticLayout(text, text_paint, text_width, alignment, spacing_mult, spacing_add, false);
 		width = text_layout.getWidth();
 		height = text_layout.getHeight();
 
