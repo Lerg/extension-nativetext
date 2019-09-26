@@ -42,4 +42,4 @@
 
   - name: align_justified
     type: number
-    desc: Justified alignment. iOS/OSX only.
+    desc: Justified alignment. iOS/macOS only.

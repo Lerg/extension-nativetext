@@ -4,6 +4,8 @@ Native Text Rendering extension for Defold.
 
 This extension renders text into an image resource, that can be applied as a texture.
 
+Supported platforms: macOS, iOS, Android.
+
 # Project Settings
 
 Add this URL to the dependencies section in `game.project`.
@@ -56,7 +58,7 @@ Right alignment.
 Center alignment.
 
 ### nativetext.align_justified
-Justified alignment. iOS/OSX only.
+Justified alignment. iOS/macOS only.
 
 ### Syntax
 

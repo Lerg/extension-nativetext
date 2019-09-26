@@ -14,20 +14,57 @@ function init(self)
 		max_texture_width = 2048,
 		max_texture_height = 2048
 	}
-	local image_resource = nativetext.new{
-		text = 'This is a test ど러연关\nыыыьщюш\nตตต ตัตัตั ตั้ตั้ตั้',
-		width = 250, -- Not required.
-		size = 30,
-		spacing_add = 50,
-		--spacing_mult = 3, -- Doesn't work on OSX.
-		align = nativetext.align_center,
-		color = vmath.vector4(0, 1, 1, 1),
-		outline_size = 8,
-		outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
-		shadow_size = 8,
-		shadow_x = 8, shadow_y = -8,
-		shadow_color = vmath.vector4(0, 0, 0, 1),
-		background_color = vmath.vector4(0.1, 0.2, 0.8, 1)
-	}
-	apply_image(self, image_resource)
+
+	local function cycle()
+		local image_resource = nativetext.new{
+			text = 'This is a test ど러연关\nыыыьщюш\nตตต ตัตัตั ตั้ตั้ตั้',
+			width = 250, -- Not required.
+			size = 30,
+			spacing_add = 50,
+			--spacing_mult = 3, -- Doesn't work on OSX.
+			align = nativetext.align_center,
+			color = vmath.vector4(0, 1, 1, 1),
+			outline_size = 8,
+			outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
+			shadow_size = 8,
+			shadow_x = 8, shadow_y = -8,
+			shadow_color = vmath.vector4(0, 0, 0, 1),
+			background_color = vmath.vector4(0.1, 0.2, 0.8, 1)
+		}
+		apply_image(self, image_resource)
+
+		timer.delay(2, false, function()
+			local image_resource = nativetext.new{
+				text = 'Normal text line',
+				size = 50
+			}
+			apply_image(self, image_resource)
+		end)
+
+		timer.delay(4, false, function()
+			local image_resource = nativetext.new{
+				text = 'Outlined text line\nwith another line underneath.',
+				size = 50,
+				outline_size = 8,
+				outline_color = vmath.vector4(0, 0, 0, 1)
+			}
+			apply_image(self, image_resource)
+		end)
+
+		timer.delay(6, false, function()
+			local image_resource = nativetext.new{
+				text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+				width = 480,
+				size = 30,
+				align = nativetext.align_justified,
+				shadow_size = 8,
+				shadow_x = 4, shadow_y = -4,
+				shadow_color = vmath.vector4(0, 0, 0, 1)
+			}
+			apply_image(self, image_resource)
+		end)
+	end
+
+	timer.delay(8, true, cycle)
+	cycle()
 end

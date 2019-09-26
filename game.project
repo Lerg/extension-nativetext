@@ -10,8 +10,8 @@ render = /render/main.renderc
 game_binding = /input/game.input_bindingc
 
 [display]
-width = 720
-height = 1280
+width = 640
+height = 960
 dynamic_orientation = 1
 
 [physics]
