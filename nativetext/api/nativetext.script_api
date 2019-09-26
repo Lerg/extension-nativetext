@@ -1,0 +1,45 @@
+- name: nativetext
+  type: table
+  desc: Native Text rendering extension API
+
+  members:
+
+#*****************************************************************************************************
+
+  - name: init
+    type: function
+    desc: Optionally init the extension and set maximum texture size, default is 1024x1024.
+
+    parameters:
+      - name: params
+        type: table
+        desc: table with the max_texture_width and max_texture_height parameters.
+
+  - name: new
+    type: function
+    desc: Generate an image resource with rendered text.
+
+    parameters:
+      - name: params
+        type: table
+        desc: table with the text parameters.
+
+  - name: align_normal
+    type: number
+    desc: Normal alignment.
+
+  - name: align_left
+    type: number
+    desc: Left alignment.
+
+  - name: align_right
+    type: number
+    desc: Right alignment.
+
+  - name: align_center
+    type: number
+    desc: Center alignment.
+
+  - name: align_justified
+    type: number
+    desc: Justified alignment. iOS/OSX only.

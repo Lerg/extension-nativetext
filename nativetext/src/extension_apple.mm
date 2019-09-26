@@ -76,12 +76,15 @@ int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *
 		default:
 			paragraph_style.alignment = NSTextAlignmentNatural;
 	}
-	paragraph_style.lineSpacing = spacing_mult;
+	paragraph_style.lineHeightMultiple = spacing_mult;
+	paragraph_style.lineSpacing = spacing_add;
 	attributes[NSParagraphStyleAttributeName] = paragraph_style;
 	if (outline_color_a > 0.0f && outline_size > 0.0f) {
 		effect_attributes = [NSMutableDictionary dictionaryWithCapacity:4];
 		effect_attributes[NSStrokeColorAttributeName] = rgba(outline_color_r, outline_color_g, outline_color_b, outline_color_a);
-		effect_attributes[NSStrokeWidthAttributeName] = @(2.0 * outline_size);
+		effect_attributes[NSStrokeWidthAttributeName] = @(3.0 * outline_size);
+		attributes[NSStrokeColorAttributeName] = rgba(0.0, 0.0, 0.0, 0.0);
+		attributes[NSStrokeWidthAttributeName] = @(-3.0 * outline_size);
 	}
 	if (shadow_color_a > 0.0f && shadow_size > 0.0f) {
 		if (effect_attributes == nil) {
@@ -115,8 +118,7 @@ int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *
 		text_size = [text_string boundingRectWithSize:AppleMakeSize(MIN(text_width, max_texture_width), max_texture_height)
 			options:NSStringDrawingUsesLineFragmentOrigin
 			attributes:size_attributes
-			context:drawing_context
-			].size;
+			context:drawing_context].size;
 	}
 	float padding_left = MAX(shadow_size - shadow_x, outline_size);
 	float padding_right = MAX(shadow_size + shadow_x, outline_size);

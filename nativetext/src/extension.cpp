@@ -99,7 +99,7 @@ int EXTENSION_NEW(lua_State *L) {
 	lua_pop(L, 1);
 
 	float spacing_add = 0;
-	lua_getfield(L, params_index, "spacing_mult");
+	lua_getfield(L, params_index, "spacing_add");
 	if (lua_isnumber(L, -1)) {
 		spacing_add = lua_tonumber(L, -1);
 	}

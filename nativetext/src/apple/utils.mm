@@ -160,6 +160,29 @@ static NSMutableArray *tasks = [[NSMutableArray alloc] init];
 		[tasks removeObjectAtIndex:0];
 	}
 }
+/*
++(CGFloat)to_pt:(CGFloat)px {
+	switch (UIDevice.userInterfaceIdiom) {
+		case UIUserInterfaceIdiomPad:
+			return px * 72.0 / 132.0;
+		case UIUserInterfaceIdiomPhone:
+			return px * 72.0 / 163.0;
+		default:
+			return px * 72.0 / 160.0;
+	}
+}
+
++(CGFloat)to_px:(CGFloat)pt {
+	// see: http://en.wikipedia.org/wiki/Point%5Fsize#Current%5FDTP%5Fpoint%5Fsystem
+	switch (UIDevice.userInterfaceIdiom) {
+		case UIUserInterfaceIdiomPad:
+			return pt / 72.0 * 132.0;
+		case UIUserInterfaceIdiomPhone:
+			return pt / 72.0 * 163.0;
+		default:
+			return pt / 72.0 * 160.0;
+	}
+}*/
 
 @end
 

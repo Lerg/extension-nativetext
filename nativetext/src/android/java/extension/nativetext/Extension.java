@@ -70,7 +70,7 @@ public class Extension {
 		}
 
 		if (shadow_color_a > 0 && shadow_size > 0) {
-			text_paint.setShadowLayer(shadow_size, shadow_x, shadow_y, argb(shadow_color_a, shadow_color_r, shadow_color_g, shadow_color_b));
+			text_paint.setShadowLayer(shadow_size, shadow_x, -shadow_y, argb(shadow_color_a, shadow_color_r, shadow_color_g, shadow_color_b));
 		}
 
 		if (text_width == 0) {
@@ -86,9 +86,12 @@ public class Extension {
 				break;
 		}
 		StaticLayout text_layout = new StaticLayout(text, text_paint, text_width, alignment, spacing_mult, spacing_add, false);
-		width = text_layout.getWidth();
-		height = text_layout.getHeight();
-
+		float padding_left = Math.max(shadow_size - shadow_x, outline_size);
+		float padding_right = Math.max(shadow_size + shadow_x, outline_size);
+		float padding_top = Math.max(shadow_size - shadow_y, outline_size);
+		float padding_bottom = Math.max(shadow_size + shadow_y, outline_size);
+		width = (int)Math.ceil(text_layout.getWidth() + padding_left + padding_right);
+		height = (int)Math.ceil(text_layout.getHeight() + padding_top + padding_bottom);
 		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		canvas.scale(1, -1, width / 2, height / 2);
