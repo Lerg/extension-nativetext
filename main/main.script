@@ -15,19 +15,19 @@ function init(self)
 		max_texture_height = 2048
 	}
 	local image_resource = nativetext.new{
-		text = 'This is a test ど러연关\nыыыьщюш\nตตต ตัตัตั ตั้ตั้ตั้ ',
+		text = 'This is a test ど러연关\nыыыьщюш\nตตต ตัตัตั ตั้ตั้ตั้',
 		width = 250, -- Not required.
 		size = 30,
-		align = nativetext.align_center,
-		shadow_x = 8, shadow_y = -8,
-		color = vmath.vector4(0, 1, 1, 1),
-		--spacing_mult = 3, -- Doesn't work on OSX.
 		spacing_add = 50,
+		--spacing_mult = 3, -- Doesn't work on OSX.
+		align = nativetext.align_center,
+		color = vmath.vector4(0, 1, 1, 1),
 		outline_size = 8,
 		outline_color = vmath.vector4(0.9, 0.1, 0.1, 1),
-		background_color = vmath.vector4(0.1, 0.2, 0.8, 1),
 		shadow_size = 8,
-		shadow_color = vmath.vector4(0, 0, 0, 1)
+		shadow_x = 8, shadow_y = -8,
+		shadow_color = vmath.vector4(0, 0, 0, 1),
+		background_color = vmath.vector4(0.1, 0.2, 0.8, 1)
 	}
 	apply_image(self, image_resource)
 end
