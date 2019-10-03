@@ -1,8 +1,16 @@
 #ifndef utils_h
 #define utils_h
 
-#include <dmsdk/sdk.h>
+#include "../extension.h"
 #import <Foundation/Foundation.h>
+
+#define LuaScriptListener FUNCTION_NAME_EXPANDED(EXTENSION_NAME, LuaScriptListener)
+#define LuaTask FUNCTION_NAME_EXPANDED(EXTENSION_NAME, LuaTask)
+#define LuaLightuserdata FUNCTION_NAME_EXPANDED(EXTENSION_NAME, LuaLightuserdata)
+#define Utils FUNCTION_NAME_EXPANDED(EXTENSION_NAME, Utils)
+#define Scheme FUNCTION_NAME_EXPANDED(EXTENSION_NAME, Scheme)
+#define Table FUNCTION_NAME_EXPANDED(EXTENSION_NAME, Table)
+#define LuaPushable FUNCTION_NAME_EXPANDED(EXTENSION_NAME, LuaPushable)
 
 @interface LuaScriptListener : NSObject
 @property(nonatomic) int listener;
