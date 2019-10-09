@@ -49,7 +49,7 @@ int EXTENSION_INIT(lua_State *L) {
 }
 
 int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *font_name,
-	int text_width, int text_align, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
+	int text_width, int text_align, bool underline, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
 	float color_r, float color_g, float color_b, float color_a,
 	float outline_color_r, float outline_color_g, float outline_color_b, float outline_color_a,
 	float shadow_color_r, float shadow_color_g, float shadow_color_b, float shadow_color_a,
@@ -79,6 +79,9 @@ int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *
 	paragraph_style.lineHeightMultiple = spacing_mult;
 	paragraph_style.lineSpacing = spacing_add;
 	attributes[NSParagraphStyleAttributeName] = paragraph_style;
+	if (underline) {
+		attributes[NSUnderlineStyleAttributeName] = @(NSUnderlineStyleSingle);
+	}
 	if (outline_color_a > 0.0f && outline_size > 0.0f) {
 		effect_attributes = [NSMutableDictionary dictionaryWithCapacity:4];
 		effect_attributes[NSStrokeColorAttributeName] = rgba(outline_color_r, outline_color_g, outline_color_b, outline_color_a);
@@ -106,6 +109,7 @@ int EXTENSION_GENERATE_TEXT_BITMAP(const char *text, int font_size, const char *
 	if (effect_attributes != nil) {
 		effect_attributes[NSFontAttributeName] = attributes[NSFontAttributeName];
 		effect_attributes[NSParagraphStyleAttributeName] = attributes[NSParagraphStyleAttributeName];
+		effect_attributes[NSUnderlineStyleAttributeName] = attributes[NSUnderlineStyleAttributeName];
 		size_attributes = effect_attributes;
 	}
 	bool is_rect = false;

@@ -20,6 +20,7 @@ function init(self)
 			text = 'This is a test ど러연关\nыыыьщюш\nตตต ตัตัตั ตั้ตั้ตั้',
 			width = 250, -- Not required.
 			size = 30,
+			underline = true,
 			spacing_add = 50,
 			--spacing_mult = 3, -- Doesn't work on OSX.
 			align = nativetext.align_center,

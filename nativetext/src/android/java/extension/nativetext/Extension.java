@@ -50,7 +50,7 @@ public class Extension {
 	}
 
 	private int generate_text_bitmap(String text, int font_size, String font_name,
-		int text_width, int text_align, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
+		int text_width, int text_align, boolean underline, float spacing_mult, float spacing_add, float outline_size, float shadow_size, float shadow_x, float shadow_y,
 		float color_r, float color_g, float color_b, float color_a,
 		float outline_color_r, float outline_color_g, float outline_color_b, float outline_color_a,
 		float shadow_color_r, float shadow_color_g, float shadow_color_b, float shadow_color_a,
@@ -58,6 +58,10 @@ public class Extension {
 		) {
 		TextPaint text_paint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.LINEAR_TEXT_FLAG);
 		text_paint.setTextSize(font_size);
+
+		if (underline) {
+			text_paint.setFlags(Paint.UNDERLINE_TEXT_FLAG);
+		}
 
 		if (outline_color_a > 0 && outline_size > 0) {
 			text_paint.setStyle(Paint.Style.STROKE);

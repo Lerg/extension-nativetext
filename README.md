@@ -32,6 +32,7 @@ Generate an image resource with rendered text.
 - `text`, string. Text.
 - `width`, number. Maximum width to fit the text in. Height is restricted by maximum texture height. Optional.
 - `size`, number. Font size. Optional.
+- `underline`, boolean. Set to `true` for underlined text. Optional.
 - `spacing_add`, number. Add distance between lines. Optional.
 - `align`, number. Text alignment. See below. Optional.
 - `color`, vector4. Text color. Optional.

@@ -91,6 +91,13 @@ int EXTENSION_NEW(lua_State *L) {
 	}
 	lua_pop(L, 1);
 
+	bool underline = false;
+	lua_getfield(L, params_index, "underline");
+	if (lua_isboolean(L, -1)) {
+		underline = lua_toboolean(L, -1);
+	}
+	lua_pop(L, 1);
+
 	float spacing_mult = 1;
 	lua_getfield(L, params_index, "spacing_mult");
 	if (lua_isnumber(L, -1)) {
@@ -223,7 +230,7 @@ int EXTENSION_NEW(lua_State *L) {
 	int height = 0;
 	void *pixels = NULL;
 	int status = EXTENSION_GENERATE_TEXT_BITMAP(text, font_size, font_name,
-		text_width, text_align, spacing_mult, spacing_add, outline_size, shadow_size, shadow_x, shadow_y,
+		text_width, text_align, underline, spacing_mult, spacing_add, outline_size, shadow_size, shadow_x, shadow_y,
 		color_r, color_g, color_b, color_a,
 		outline_color_r, outline_color_g, outline_color_b, outline_color_a,
 		shadow_color_r, shadow_color_g, shadow_color_b, shadow_color_a,
