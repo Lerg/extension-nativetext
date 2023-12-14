@@ -41,7 +41,7 @@ static void push_image_resource(lua_State *L, int width, int height, dmBuffer::H
 	lua_setfield(L, -2, "header");
 
 	if (buffer != 0) {
-		dmScript::LuaHBuffer lua_buffer = {buffer, true};
+		dmScript::LuaHBuffer lua_buffer(buffer, dmScript::OWNER_LUA);
 		dmScript::PushBuffer(L, lua_buffer);
 		lua_setfield(L, -2, "buffer");
 	}
